@@ -1,0 +1,95 @@
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: gainsboro;
+}
+
+/* here is the css for the header */
+
+h1{
+  font-family: monospace;
+  font-size: 45px;
+}
+
+/* here is the css for the main */
+
+.main{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.options{
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-around;
+  gap: 20px;
+}
+
+.buttons{
+  text-decoration: none;
+  font-family: monospace;
+  font-size: 20px;
+  padding: 10px 20px;
+  width: 130px;
+  height: auto;
+}
+
+:root{
+  --grid-cols: 1;
+  --grid-rows: 1;
+}
+
+.board{
+  display: grid;
+  width: 500px;
+  height: 500px;
+  border: 0px solid;
+  border-color: black;
+  background-color: white;
+  box-shadow: darkgray 5px 5px 5px;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+}
+
+.grid{
+  border: 1px solid;
+  border-color: black;
+}
+
+.gridOption{
+  display: none;
+  position: absolute;
+  width: 130px;
+  height: auto;
+}
+
+.dropdown{
+  position: relative;
+  display: inline-block;
+}
+
+.opt{
+  text-align: left;
+  font-size: 20px;
+  text-decoration: none;
+  font-family: monospace;
+  width: 130px;
+  height: auto;
+}
+
+.grid-1{
+  background-color: black;
+}
+
+
+.dropdown:hover .gridOption{display: block;}
+
+
+
+
+/* here is the css for the footer */
