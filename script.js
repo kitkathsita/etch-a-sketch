@@ -1,7 +1,9 @@
 const board = document.querySelector('.board')
 const opts = document.querySelectorAll('.opt')
 const clearButton = document.querySelector('.clear')
-const buttonsModes = document.querySelectorAll('.mode')
+const buttonColors = document.querySelector('.colors')
+const buttonEraser = document.querySelector('.eraser')
+const buttonRainbow = document.querySelector('.rainbow')
 
 let actualMode = 'black'
 
@@ -9,8 +11,9 @@ let mouse = 0
 document.body.onmousedown = () => (mouse = true)
 document.body.onmouseup = () => (mouse = false)
 
-
-buttonsModes.forEach(mode => mode.addEventListener('click', actualModeFunc))
+buttonColors.onclick = () => (actualMode = 'colors')
+buttonEraser.onclick = () => (actualMode = 'eraser')
+buttonRainbow.onclick = () => (actualMode = 'rainbow')
 
 function makeGrid(){
   let rows = this.classList[1]
@@ -23,20 +26,27 @@ function makeGrid(){
     board.appendChild(miniDiv)
   }
 
-  let newMode = actualMode
+  console.log(actualMode)
 
-  console.log(newMode)
-
-  if (newMode==='black'){
+  if (actualMode==='black'){
     const miniGrids = document.querySelectorAll('.grid')
-    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorBackground))
-    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorBackground))
+    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorBlack))
+    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorBlack))
   }
-  else if (newMode==='rainbow'){
-    console.log('hola')
+  else if (actualMode==='colors'){
+    const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorColors))
+    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorColors))
+  }
+  else if (actualMode==='rainbow'){
     const miniGrids = document.querySelectorAll('.grid')
     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorRainbow))
     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorRainbow))
+  }
+  else if (actualMode==='eraser'){
+    const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorEraser))
+    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorEraser))
   }
 }
 
@@ -53,8 +63,23 @@ function makeInitialGrid(){
 
   if (actualMode==='black'){
     const miniGrids = document.querySelectorAll('.grid')
-    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorBackground))
-    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorBackground))
+    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorBlack))
+    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorBlack))
+  }
+  else if (actualMode==='colors'){
+    const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorColors))
+    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorColors))
+  }
+  else if (actualMode==='rainbow'){
+    const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorRainbow))
+    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorRainbow))
+  }
+  else if (actualMode==='eraser'){
+    const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.addEventListener('mouseover', colorEraser))
+    miniGrids.forEach(grid => grid.addEventListener('mousedown', colorEraser))
   }
 }
 
@@ -65,14 +90,24 @@ function clear(){
   miniDiv2.forEach(grid => grid.remove())
 }
 
-function colorBackground(e){
+function colorBlack(e){
   if (e.type==='mouseover' && !mouse) return
   this.style.backgroundColor = 'black'
+}
+
+function colorColors(e){
+  if (e.type==='mouseover' && !mouse) return
+  this.style.backgroundColor = 'purple'
 }
 
 function colorRainbow(e){
   if (e.type==='mouseover' && !mouse) return
   this.style.backgroundColor = 'pink'
+}
+
+function colorEraser(e){
+  if (e.type==='mouseover' && !mouse) return
+  this.style.backgroundColor = 'white'
 }
 
 function clearBoard(){
