@@ -9,7 +9,7 @@ const allOptions = document.querySelectorAll('.mode')
 
 let actualMode = 'black'
 
-let mouse = false
+let mouse = 0
 document.body.onmousedown = () => (mouse = true)
 document.body.onmouseup = () => (mouse = false)
 
@@ -17,161 +17,127 @@ buttonColors.onclick = () => (actualMode = 'colors')
 buttonEraser.onclick = () => (actualMode = 'eraser')
 buttonRainbow.onclick = () => (actualMode = 'rainbow')
 
-function makeGrid(){
+function makeGrid() {
 
   let rows = this.classList[1]
   board.style.setProperty('--grid-rows', rows)
   board.style.setProperty('--grid-cols', rows)
 
-  for(let i=0; i<(rows*rows); i++){
+  for (let i = 0; i < (rows * rows); i++) {
     var miniDiv = document.createElement('div')
-    miniDiv.classList.add('grid','grid-'+i)
+    miniDiv.classList.add('grid', 'grid-' + i)
     board.appendChild(miniDiv)
   }
 
-  // allOptions.forEach(mode => mode.addEventListener('mouseover', ColorMode))
+  if (actualMode === 'eraser') {
+    actualMode = 'black'
+  }
 
-  // console.log(actualMode)
-
-//   if (actualMode==='black'){
-//     const miniGrids = document.querySelectorAll('.grid')
-//     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorBlack))
-//     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorBlack))
-//   }
-//   else if (actualMode==='colors'){
-//     const miniGrids = document.querySelectorAll('.grid')
-//     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorColors))
-//     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorColors))
-//   }
-//   else if (actualMode==='rainbow'){
-//     const miniGrids = document.querySelectorAll('.grid')
-//     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorRainbow))
-//     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorRainbow))
-//   }
-//   else if (actualMode==='eraser'){
-//     const miniGrids = document.querySelectorAll('.grid')
-//     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorEraser))
-//     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorEraser))
-//   }
+  actualModeFunc()
 }
 
-function makeInitialGrid(){
+function makeInitialGrid() {
   let rows = 16
   board.style.setProperty('--grid-rows', rows)
   board.style.setProperty('--grid-cols', rows)
 
-  for(let i=0; i<(rows*rows); i++){
+  for (let i = 0; i < (rows * rows); i++) {
     let miniDiv = document.createElement('div')
-    miniDiv.classList.add('grid','grid-'+i)
+    miniDiv.classList.add('grid', 'grid-' + i)
     board.appendChild(miniDiv)
   }
-
-  // if (actualMode==='black'){
-  //   const miniGrids = document.querySelectorAll('.grid')
-  //   miniGrids.forEach(grid => grid.addEventListener('mouseover', colorBlack))
-  //   miniGrids.forEach(grid => grid.addEventListener('mousedown', colorBlack))
-  // }
-  // else if (actualMode==='colors'){
-  //   const miniGrids = document.querySelectorAll('.grid')
-  //   miniGrids.forEach(grid => grid.addEventListener('mouseover', colorColors))
-  //   miniGrids.forEach(grid => grid.addEventListener('mousedown', colorColors))
-  // }
-  // else if (actualMode==='rainbow'){
-  //   const miniGrids = document.querySelectorAll('.grid')
-  //   miniGrids.forEach(grid => grid.addEventListener('mouseover', colorRainbow))
-  //   miniGrids.forEach(grid => grid.addEventListener('mousedown', colorRainbow))
-  // }
-  // else if (actualMode==='eraser'){
-  //   const miniGrids = document.querySelectorAll('.grid')
-  //   miniGrids.forEach(grid => grid.addEventListener('mouseover', colorEraser))
-  //   miniGrids.forEach(grid => grid.addEventListener('mousedown', colorEraser))
-  // }
 }
 
 makeInitialGrid()
 
-function clear(){
+function clear() {
   let miniDiv2 = document.querySelectorAll('.grid')
   miniDiv2.forEach(grid => grid.remove())
 }
 
-function colorBlack(e){
-  if (e.type==='mouseover' && !mouse) return
+function colorBlack(e) {
+  if (e.type === 'mouseover' && !mouse) return
   this.style.backgroundColor = 'black'
 }
 
-function colorColors(e){
-  if (e.type==='mouseover' && !mouse) return
+function colorColors(e) {
+  if (e.type === 'mouseover' && !mouse) return
   this.style.backgroundColor = 'purple'
 }
 
-function colorRainbow(e){
-  if (e.type==='mouseover' && !mouse) return
+function colorRainbow(e) {
+  if (e.type === 'mouseover' && !mouse) return
   this.style.backgroundColor = 'pink'
 }
 
-function colorEraser(e){
-  if (e.type==='mouseover' && !mouse) return
+function colorEraser(e) {
+  if (e.type === 'mouseover' && !mouse) return
   this.style.backgroundColor = 'white'
 }
 
-function clearBoard(){
+function clearBoard() {
   const miniGrids = document.querySelectorAll('.grid')
   miniGrids.forEach(grid => grid.style.backgroundColor = 'white')
 }
 
-function actualModeFunc(){
-
-  // if (this.classList[1]==='colors'){
-  //   const miniGrids = document.querySelectorAll('.grid')
-  //   miniGrids.forEach(grid => grid.addEventListener('mouseover', colorColors))
-  //   miniGrids.forEach(grid => grid.addEventListener('mousedown', colorColors))
-  // }
-  // else if (this.classList[1]==='rainbow'){
-  //   const miniGrids = document.querySelectorAll('.grid')
-  //   miniGrids.forEach(grid => grid.addEventListener('mouseover', colorRainbow))
-  //   miniGrids.forEach(grid => grid.addEventListener('mousedown', colorRainbow))
-  // }
-  // else if (this.classList[1]==='eraser'){
-  //   const miniGrids = document.querySelectorAll('.grid')
-  //   miniGrids.forEach(grid => grid.addEventListener('mouseover', colorEraser))
-  //   miniGrids.forEach(grid => grid.addEventListener('mousedown', colorEraser))
-  // }
+function actualModeFunc() {
   buttonColors.onclick = () => (actualMode = 'colors')
   buttonEraser.onclick = () => (actualMode = 'eraser')
   buttonRainbow.onclick = () => (actualMode = 'rainbow')
 
   colorMode()
-
-  // mouse === false
-  
 }
 
-function colorMode(){
+function colorMode() {
 
-  console.log(actualMode)
-
-  if (actualMode==='black'){
+  if (actualMode === 'black') {
     const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorEraser))
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorColors))
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorRainbow))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorColors))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorRainbow))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorEraser))
     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorBlack))
     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorBlack))
   }
-  else if (actualMode==='colors'){
+  else if (actualMode === 'colors') {
     const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorEraser))
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorColors))
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorRainbow))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorBlack))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorRainbow))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorEraser))
     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorColors))
     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorColors))
   }
-  else if (actualMode==='rainbow'){
+  else if (actualMode === 'rainbow') {
     const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorEraser))
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorColors))
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorRainbow))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorBlack))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorColors))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorEraser))
     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorRainbow))
     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorRainbow))
   }
-  else if (actualMode==='eraser'){
+  else if (actualMode === 'eraser') {
     const miniGrids = document.querySelectorAll('.grid')
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorEraser))
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorColors))
+    miniGrids.forEach(grid => grid.removeEventListener('mouseover', colorRainbow))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorBlack))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorColors))
+    miniGrids.forEach(grid => grid.removeEventListener('mousedown', colorRainbow))
     miniGrids.forEach(grid => grid.addEventListener('mouseover', colorEraser))
     miniGrids.forEach(grid => grid.addEventListener('mousedown', colorEraser))
   }
+
 }
+
+actualModeFunc()
 
 opts.forEach(opt => opt.addEventListener('click', clear))
 opts.forEach(opt => opt.addEventListener('click', makeGrid))
@@ -179,6 +145,3 @@ opts.forEach(opt => opt.addEventListener('click', makeGrid))
 clearButton.addEventListener('click', clearBoard)
 
 allOptions.forEach(mode => mode.addEventListener('click', actualModeFunc))
-
-// buttonColors.addEventListener('click', colorColors)
-
