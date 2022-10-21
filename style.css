@@ -1,10 +1,11 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: gainsboro;
   font-family: 'Silkscreen';
+  justify-content: space-around;
+  height: 1000px;
 }
 
 /* here is the css for the header */
@@ -27,6 +28,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-content: space-around;
+  align-items: center;
   gap: 20px;
 }
 
@@ -37,6 +39,8 @@ h1 {
   padding: 10px 20px;
   width: 140px;
   height: auto;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 :root {
@@ -81,4 +85,45 @@ h1 {
   display: block;
 }
 
+input[type="color" i] {
+  appearance: auto;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: buttonface;
+  color: buttontext;
+  border-width: 0px;
+  border-style: solid;
+  border-color: buttonborder;
+  border-image: initial;
+  padding: 0px;
+  transition: 0.5s;
+}
+
+.buttons:hover{
+  transform: scale(1.1);
+  background-color: #252525;
+  color: white;
+}
+
+input[type="color" i]:hover {
+  transform: scale(1.1);
+}
+
+.selected{
+  background-color: #252525;
+  color: white;
+}
+
 /* here is the css for the footer */
+
+.footer{
+  text-decoration: none;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 25px;
+}
+
+a {
+  text-decoration: none;
+}

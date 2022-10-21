@@ -4,10 +4,11 @@ const clearButton = document.querySelector('.clear')
 const buttonColors = document.querySelector('.colors')
 const buttonEraser = document.querySelector('.eraser')
 const buttonRainbow = document.querySelector('.rainbow')
-
+const colorPicker = document.querySelector('#colorChoser')
 const allOptions = document.querySelectorAll('.mode')
 
 let actualMode = 'black'
+let actualColor = 'black'
 
 let mouse = 0
 document.body.onmousedown = () => (mouse = true)
@@ -50,6 +51,10 @@ function makeInitialGrid() {
 
 makeInitialGrid()
 
+function getRandomInt() {
+  return Math.floor(Math.random() * 255);
+}
+
 function clear() {
   let miniDiv2 = document.querySelectorAll('.grid')
   miniDiv2.forEach(grid => grid.remove())
@@ -62,12 +67,15 @@ function colorBlack(e) {
 
 function colorColors(e) {
   if (e.type === 'mouseover' && !mouse) return
-  this.style.backgroundColor = 'purple'
+  this.style.backgroundColor = actualColor
 }
 
 function colorRainbow(e) {
   if (e.type === 'mouseover' && !mouse) return
-  this.style.backgroundColor = 'pink'
+  let a = getRandomInt()
+  let b = getRandomInt()
+  let c = getRandomInt()
+  this.style.backgroundColor = 'rgb(' + [a,b,c].join(',') + ')'
 }
 
 function colorEraser(e) {
@@ -84,7 +92,6 @@ function actualModeFunc() {
   buttonColors.onclick = () => (actualMode = 'colors')
   buttonEraser.onclick = () => (actualMode = 'eraser')
   buttonRainbow.onclick = () => (actualMode = 'rainbow')
-
   colorMode()
 }
 
@@ -137,6 +144,13 @@ function colorMode() {
 
 }
 
+function actualColorfunc(e){
+  if (actualMode!='eraser' && actualMode!='rainbow'){
+    actualColor = e.target.value
+  }
+  console.log(actualColor)
+}
+
 actualModeFunc()
 
 opts.forEach(opt => opt.addEventListener('click', clear))
@@ -145,3 +159,5 @@ opts.forEach(opt => opt.addEventListener('click', makeGrid))
 clearButton.addEventListener('click', clearBoard)
 
 allOptions.forEach(mode => mode.addEventListener('click', actualModeFunc))
+
+colorChoser.addEventListener('input', actualColorfunc)
